@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.8)
 
-project(MsDetours)
+project(
+    MsDetours
+    VERSION 4.0.1
+)
 
 option(MS_DETOURS_INSTALL "Install MsDetours" OFF)
 
