@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.8)
 
 project(MsDetours)
 
+option(MS_DETOURS_INSTALL "Install MsDetours" OFF)
+
 # Detours
 set(TARGET MsDetours)
 set(DETOURS_SOURCE Detours/src)
@@ -28,3 +30,18 @@ set_property (
 
 target_compile_options(${TARGET} PRIVATE /W4 /WX /Zi /MT /Gy /Gm- /Zl /Od)
 target_include_directories(${TARGET} PUBLIC ${DETOURS_SOURCE})
+
+include(cmake/cpm.cmake)
+CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.11.1")
+
+if(MS_DETOURS_INSTALL)
+    packageProject(
+        NAME ${PROJECT_NAME}
+        VERSION ${PROJECT_VERSION}
+        NAMESPACE ${PROJECT_NAME}
+        BINARY_DIR ${PROJECT_BINARY_DIR}
+        INCLUDE_DIR ${PROJECT_SOURCE_DIR/Detours/src}
+        INCLUDE_DESTINATION include/${PROJECT_NAME}
+        INCLUDE_HEADER_PATTERN "*.h"
+    )
+endif()
