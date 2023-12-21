@@ -32,7 +32,9 @@ set_property (
     APPEND PROPERTY HEADER_FILE_ONLY true)
 
 target_compile_options(${TARGET} PRIVATE /W4 /WX /Zi /MT /Gy /Gm- /Zl /Od)
-target_include_directories(${TARGET} PUBLIC ${DETOURS_SOURCE})
+target_include_directories(${TARGET} PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/${DETOURS_SOURCE}>
+    $<INSTALL_INTERFACE:include/>)
 
 include(cmake/cpm.cmake)
 CPMAddPackage("gh:TheLartians/PackageProject.cmake@1.11.1")
